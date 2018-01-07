@@ -3,13 +3,23 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import axios from 'axios'
+//element-ui 引入
+import ElementUI from 'element-ui';
+//import 'element-ui/lib/theme-default/index.css';  
+import 'element-ui/lib/theme-chalk/index.css';
 
-Vue.config.productionTip = false
+
+//element-ui 引入 继承
+Vue.use(ElementUI)
+Vue.prototype.$axios = axios
+
+
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  router,
-  template: '<App/>',
-  components: { App }
-})
+    router,
+    render: h => h(App)
+}).$mount('#app');
+
+
