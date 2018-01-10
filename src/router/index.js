@@ -16,7 +16,11 @@ export default new Router({
             children:[
                 {
                     path: '/',
-                    component: resolve => require(['../components/page/HelloWorld.vue'], resolve)
+                    component: resolve => require(['../components/page/Readme.vue'], resolve)
+                },
+                {
+                    path: '/count',
+                    component: resolve => require(['../components/page/Count.vue'], resolve)
                 },
                 {
                     path: '/users',

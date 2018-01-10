@@ -31,6 +31,17 @@
                         title: '自述'
                     },
                     {
+                        icon: 'el-icon-loading',
+                        index: '9',
+                        title: '植物管理',
+                        subs: [
+                            {
+                                index: 'count',
+                                title: '成本核算'
+                            }
+                        ]
+                    },
+                    {
                         icon: 'el-icon-menu',
                         index: '10',
                         title: '后台管理',
@@ -40,7 +51,7 @@
                                 title: '用户管理'
                             }
                         ]
-                    },
+                    }
                 ]
             }
         },

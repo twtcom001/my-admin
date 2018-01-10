@@ -22,6 +22,7 @@
     export default {
         data: function(){
             return {
+                url: '/auth',
                 ruleForm: {
                     username: '',
                     password: ''
@@ -38,17 +39,22 @@
         },
         methods: {
             submitForm(formName) {
-                const self = this;
-                self.$refs[formName].validate((valid) => {
-                    if (valid) {
-                        localStorage.setItem('ms_username',self.ruleForm.username);
-                        self.$router.push('/readme');
-                    } else {
-                        console.log('error submit!!');
-                        return false;
+                console.log(this.ruleForm);
+                this.$axios.get('/auth', {params: { 'username':this.ruleForm.username,'password':this.ruleForm.password  }}).then((response) => {
+                    console.log(response);
+                    // success callback
+                    if(response.data.auth == 'valid'){
+
+                        this.$message.success('登录成功');
+                        localStorage.setItem('ms_username',this.ruleForm.username);
+                        this.$router.push('/count');
                     }
+                    
+                }, (response) => {
+                    // error callback
+                    this.$message.success('提交失败！');
                 });
-            }
+        }
         }
     }
 </script>
