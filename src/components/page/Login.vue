@@ -37,24 +37,39 @@
                 }
             }
         },
+        created(){ 
+            this.getAuth();
+        },
         methods: {
             submitForm(formName) {
-                console.log(this.ruleForm);
                 this.$axios.get('/auth', {params: { 'username':this.ruleForm.username,'password':this.ruleForm.password  }}).then((response) => {
-                    console.log(response);
+                    //console.log(response);
                     // success callback
                     if(response.data.auth == 'valid'){
 
-                        this.$message.success('登录成功');
+                        //console.log(this)
+                        //console.log(response.data.token)
+                        this.$store.commit('set_token', response.data.token);
+                        this.$axios.defaults.auth.username = response.data.token;
                         localStorage.setItem('ms_username',this.ruleForm.username);
-                        this.$router.push('/count');
-                    }
-                    
+                        //localStorage.setItem('token',response.data.token);
+                        this.$message.success('登录成功');
+                        this.$router.push('/readme');
+                    }              
                 }, (response) => {
                     // error callback
                     this.$message.success('提交失败！');
                 });
-        }
+             },
+             getAuth(){
+                this.$axios.defaults.auth.username = localStorage.token;
+                this.$axios.get('/api/v1.0/authtoken', {params: { 'token':localStorage.token  }}).then((response) => {   
+                    if(response.data.status){
+                        this.$router.push('/readme');
+                    }              
+                }, (response) => {
+                });
+             }
         }
     }
 </script>

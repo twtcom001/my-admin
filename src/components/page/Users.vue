@@ -140,7 +140,7 @@
                 pageTotal: 0
             }
         },
-        created(){
+        created(){ 
             this.getData(this.currentPage,this.pageSize);
         },
         methods:{
@@ -163,7 +163,7 @@
                 
             },
             form1onSubmit() {
-                console.log(this.form1);
+                //console.log(this.form1);
                 this.$axios.put(this.url+"/"+this.form1.id, this.form1).then((response) => {
                     // success callback
                     this.dialogForm1Visible = false;
@@ -176,14 +176,17 @@
                 
             },
             getData(page,size){
-              let self = this;
-              self.$axios.get(self.url,{params: { 'page':page,'size':size  }}).then((res) => {
-                self.tableData = res.data.list;
-                self.pageTotal = res.data.total;
-                self.currentPage = res.data.page;
-                self.pageSize = res.data.size;
+
+              console.log(this.$axios.defaults.auth);
+              console.log(localStorage.token);
+              
+              this.$axios.get(this.url,{params: { 'page':page,'size':size  }}).then((res) => {
+                this.tableData = res.data.list;
+                this.pageTotal = res.data.total;
+                this.currentPage = res.data.page;
+                this.pageSize = res.data.size;
               },res=>{
-                console.log (self.url+'调用失败');      
+                console.log (this.url+'调用失败');      
               })
             },
             indexMethod(index) {

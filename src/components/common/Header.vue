@@ -27,9 +27,11 @@
             }
         },
         methods:{
-                    handleCommand(command) {
+            handleCommand(command) {
                 if(command == 'loginout'){
-                    localStorage.removeItem('ms_username')
+                                    console.log('logout');
+                    localStorage.removeItem('ms_username');
+                    localStorage.removeItem('token')
                     this.$router.push('/login');
                 }
             }

@@ -6,27 +6,7 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
-  data(){
-    return{
-      url: '/api/v1.0/users'
-    }
-  },
-  created(){
-      this.getData();
-  },
-  methods: {
-    getData(){
-      let self = this;
-      console.log ('init');
-      self.$axios.get(self.url).then((res) => {
-        self.tableData = res.data.list;
-
-      },res=>{
-        console.log (self.url+'调用失败');      
-      })
-    }
-  }
+  name: 'HelloWorld'
 }
 </script>
 
