@@ -1,61 +1,52 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+import babelpolyfill from 'babel-polyfill'
 import Vue from 'vue'
-import Vuex from 'vuex'
-import store from './vuex/store'
 import App from './App'
-import router from './router'
-import axios from 'axios'
-//element-ui 引入
-import ElementUI from 'element-ui'; 
-import 'element-ui/lib/theme-chalk/index.css';
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-default/index.css'
+//import './assets/theme/theme-green/index.css'
+import VueRouter from 'vue-router'
+import store from './vuex/store'
+import Vuex from 'vuex'
+//import NProgress from 'nprogress'
+//import 'nprogress/nprogress.css'
+import routes from './routes'
+import Mock from './mock'
+Mock.bootstrap();
+import 'font-awesome/css/font-awesome.min.css'
 
-//开启debug模式
-Vue.config.debug = true;
-
-//element-ui 引入 继承
 Vue.use(ElementUI)
-Vue.prototype.$axios = axios
+Vue.use(VueRouter)
+Vue.use(Vuex)
 
-// 初始化axios
-//axios.defaults.baseURL = 'http://127.0.0.1:5000'
-axios.defaults.auth = {
-    username: '',
-    password: '',
-}
-// 路由跳转
+//NProgress.configure({ showSpinner: false });
+
+const router = new VueRouter({
+  routes
+})
+
 router.beforeEach((to, from, next) => {
-    if (to.meta.required) {
-        // 检查localStorage
-        if (localStorage.token) {
-            store.commit('set_token', localStorage.token)
-            // 添加axios头部Authorized
-            axios.defaults.auth = {
-                username: 'localStorage.token',
-                password: 'unused',
-            }
-            // iview的页面加载条
-            //iView.LoadingBar.start();
-            next()
-        } else {
-            next({
-                path: '/login',
-            })
-        }
-    } else {
-        //iView.LoadingBar.start();
-        next()
-    }
+  //NProgress.start();
+  if (to.path == '/login') {
+    sessionStorage.removeItem('user');
+  }
+  let user = JSON.parse(sessionStorage.getItem('user'));
+  if (!user && to.path != '/login') {
+    next({ path: '/login' })
+  } else {
+    next()
+  }
 })
 
-router.afterEach((to, from, next) => {
-    //iView.LoadingBar.finish();
-})
-/* eslint-disable no-new */
+//router.afterEach(transition => {
+//NProgress.done();
+//});
+
 new Vue({
-    router,
-    store:store,
-    render: h => h(App)
-}).$mount('#app');
-
+  //el: '#app',
+  //template: '<App/>',
+  router,
+  store,
+  //components: { App }
+  render: h => h(App)
+}).$mount('#app')
 
