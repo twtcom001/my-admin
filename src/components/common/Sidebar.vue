@@ -33,11 +33,15 @@
                     {
                         icon: 'el-icon-loading',
                         index: '9',
-                        title: '植物管理',
+                        title: '成本管理',
                         subs: [
                             {
-                                index: 'count',
-                                title: '成本核算'
+                                index: 'pcount',
+                                title: '清蒸庄园'
+                            },
+                            {
+                                index: 'qcount',
+                                title: '吃饱饱'
                             }
                         ]
                     },

@@ -25,13 +25,13 @@
       :rows="2"
       placeholder="请输入内容">
     </el-input>
-     </el-form-item>
+     </el-form-item> 
     <el-form-item label="收支类型" :label-width="formLabelWidth">
       <el-select v-model="form.src" placeholder="普通用户">
-        <el-option label="微信收入" value="4"></el-option>
-        <el-option label="淘宝收入" value="3"></el-option>
-        <el-option label="其他收入" value="2"></el-option>
-        <el-option label="支出" value="1"></el-option>
+        <el-option label="微信收入" value="微信收入"></el-option>
+        <el-option label="淘宝收入" value="淘宝收入"></el-option>
+        <el-option label="其他收入" value="其他收入"></el-option>
+        <el-option label="支出" value="支出"></el-option>
 
       </el-select>
     </el-form-item>
@@ -64,13 +64,13 @@
       :rows="2"
       placeholder="请输入内容">
     </el-input>
-     </el-form-item>
+     </el-form-item>    
     <el-form-item label="收支类型" :label-width="formLabelWidth">
       <el-select v-model="form1.src" placeholder="普通用户">
-        <el-option label="微信收入" value="4"></el-option>
-        <el-option label="淘宝收入" value="3"></el-option>
-        <el-option label="其他收入" value="2"></el-option>
-        <el-option label="支出" value="1"></el-option>
+        <el-option label="微信收入" value="微信收入"></el-option>
+        <el-option label="淘宝收入" value="淘宝收入"></el-option>
+        <el-option label="其他收入" value="其他收入"></el-option>
+        <el-option label="支出" value="支出"></el-option>
 
       </el-select>
     </el-form-item>
@@ -153,12 +153,14 @@
                 form: {
                   date: '',
                   total: '',
-                  src: '3',
+                  //src: '3',
+                  account_type:'xhl'
                 },
                 form1: {
                   date: '',
                   total: '',
                   src: '',
+                  account_type:'xhl',
                   id: ''
                 },
                 formLabelWidth: '120px',
@@ -173,7 +175,7 @@
 
             onSubmit() {
                 console.log(this.form.src);
-                if (this.form.src == '1' ){
+                if (this.form.src == '支出' ){
                   this.form.total = "-"+ this.form.total;
                   console.log(this.form.total);
                 }
@@ -203,7 +205,7 @@
             },
             getData(page,size){
               let self = this;
-              self.$axios.get(self.url,{params: { 'page':page,'size':size  }}).then((res) => {
+              self.$axios.get(self.url,{params: { 'page':page,'size':size,account_type:'xhl'  }}).then((res) => {
                 self.tableData = res.data.list;
                 self.pageTotal = res.data.total;
                 self.currentPage = res.data.page;

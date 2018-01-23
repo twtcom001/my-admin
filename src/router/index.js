@@ -19,8 +19,12 @@ export default new Router({
                     component: resolve => require(['../components/page/Readme.vue'], resolve)
                 },
                 {
-                    path: '/count',
-                    component: resolve => require(['../components/page/Count.vue'], resolve)
+                    path: '/pcount',
+                    component: resolve => require(['../components/page/PCount.vue'], resolve)
+                },
+               {
+                    path: '/qcount',
+                    component: resolve => require(['../components/page/QCount.vue'], resolve)
                 },
                 {
                     path: '/users',

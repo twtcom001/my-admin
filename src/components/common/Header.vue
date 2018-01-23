@@ -79,7 +79,7 @@
         text-align: center;
     }
   .el-menu-vertical-demo:not(.el-menu--collapse) {
-    width: 200px;
+    width: 100px;
     min-height: 400px;
   }
 </style>

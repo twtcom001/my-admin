@@ -13,7 +13,10 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
+    "babel-polyfill": "^6.26.0",
+    "echarts": "^4.0.1",
     "element-ui": "^2.0.10",
+    "font-awesome": "^4.7.0",
     "vue": "^2.5.2",
     "vue-easytable": "^1.6.3",
     "vue-router": "^3.0.1",
